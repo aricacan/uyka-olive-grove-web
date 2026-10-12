@@ -1,0 +1,58 @@
+/*
+ * ─────────────────────────────────────────────────────────────
+ *  UYKA THEME — the single place to change the look of the site.
+ * ─────────────────────────────────────────────────────────────
+ *  Colors are named by ROLE, not by hue, so a palette change never
+ *  requires touching components:
+ *
+ *    brand / brand-deep  → dark green surfaces (header, footer, hero, B2B)
+ *    on-brand            → text & lines on top of brand surfaces
+ *    canvas / surface    → page background / alternate light sections
+ *    ink / muted         → body text / secondary text
+ *    line                → borders, dividers
+ *    accent              → highlight on light backgrounds (eyebrows, links)
+ *    accent-soft         → highlight on dark backgrounds
+ *
+ *  Fonts are loaded in `src/styles/fonts.ts`; roles are mapped below.
+ */
+
+@theme {
+  /* Palette — cool greens + white, no beige/gold */
+  --color-brand: #12291d;
+  --color-brand-deep: #1c3a2a;
+  --color-on-brand: #ffffff;
+  --color-canvas: #ffffff;
+  --color-surface: #f1f4f0;
+  --color-ink: #131a15;
+  --color-muted: #5e6f63;
+  --color-line: #dce3db;
+  --color-accent: #3e6b3f;
+  --color-accent-soft: #a7c49a;
+  --color-whatsapp: #25d366;
+  --color-oil: #6f8a3a; /* olive oil fill in the back-to-top bottle */
+  --color-danger: #b42318;
+
+  /* Font roles (families come from fonts.ts CSS variables) */
+  --font-display: var(--font-display-family), "Georgia", serif;
+  --font-sans: var(--font-body-family), system-ui, sans-serif;
+  --font-product: var(--font-product-family), var(--font-body-family), sans-serif;
+
+  /* Type details */
+  --display-weight: 400; /* heading weight — Instrument Serif ships 400 only */
+  --tracking-display: -0.015em;
+  --text-eyebrow: 0.75rem;
+  --tracking-eyebrow: 0.28em;
+
+  /* Layout */
+  --container-site: 80rem;
+  --rail-item-width: 82%; /* card width in mobile swipe rails */
+  --spacing-section: 4.5rem; /* vertical section padding, mobile */
+  --spacing-section-lg: 8rem; /* vertical section padding, ≥ sm */
+  --spacing-header: 5rem; /* header height at the top of the page */
+  --spacing-header-compact: 4rem; /* header height after scrolling */
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-reveal: 900ms;
+  --duration-marquee: 40s;
+}

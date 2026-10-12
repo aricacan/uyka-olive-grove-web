@@ -1,0 +1,135 @@
+/*
+ * Motion rules. Only three effects exist site-wide: reveal on scroll,
+ * hero parallax (JS, see HeroParallax) and the oil-drop signature.
+ * Everything is gated on JS being available and on reduced-motion being off,
+ * so content is never hidden for users without animations.
+ */
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition:
+      opacity var(--duration-reveal) var(--ease-editorial),
+      transform var(--duration-reveal) var(--ease-editorial);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal="shown"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-reveal="shown"] .oil-drop {
+    animation: oil-drop 1.6s var(--ease-editorial) both;
+  }
+
+  [data-reveal="shown"] .oil-ripple {
+    animation: oil-ripple 1.6s var(--ease-editorial) 0.9s both;
+  }
+}
+
+@keyframes oil-drop {
+  0% {
+    transform: translateY(-3rem) scaleY(1.15);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes oil-ripple {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Marquee strip: content is rendered twice and slides by half its width. */
+.marquee-track {
+  animation: marquee var(--duration-marquee) linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Success check mark in forms draws itself once. */
+@keyframes draw-check {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Hero product showcase: caption swap + autoplay progress. */
+@keyframes showcase-caption {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes showcase-progress {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Back-to-top bottle: the oil surface keeps rolling (one wave period = 40 SVG units). */
+.oil-wave {
+  animation: oil-wave 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oil-wave {
+    animation: none;
+  }
+}
+
+@keyframes oil-wave {
+  to {
+    transform: translateX(-40px);
+  }
+}
+
+/* Back-to-top chevron: a slow, small upward drift that hints at the direction. */
+.nudge-up {
+  animation: nudge-up 2.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nudge-up {
+    animation: none;
+  }
+}
+
+@keyframes nudge-up {
+  50% {
+    transform: translateY(-3px);
+  }
+}

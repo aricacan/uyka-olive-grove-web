@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import "../styles/theme.css";
+@import "../styles/motion.css";
+@import "../styles/a11y.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: var(--display-weight);
+    line-height: 1.05;
+    letter-spacing: var(--tracking-display);
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Small uppercase label above headings and on buttons. */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+/* Standard vertical rhythm for full-width sections. */
+@utility section-y {
+  padding-block: var(--spacing-section);
+
+  @media (width >= 40rem) {
+    padding-block: var(--spacing-section-lg);
+  }
+}
+
+/* Link underline that grows from the left on hover/focus (nav, footer links). */
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-origin: content-box; /* stays under the text even with touch padding */
+  background-size: 0% 1px;
+  transition: background-size 400ms var(--ease-editorial);
+
+  &:hover,
+  &:focus-visible,
+  &[aria-current="page"] {
+    background-size: 100% 1px;
+  }
+}
+
+/*
+ * Horizontal swipe rail for card lists on phones (use as max-sm:rail).
+ * Cards peek from the right edge so it's obvious the list scrolls.
+ */
+@utility rail {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-inline: -1rem;
+  padding-inline: 1rem;
+  scroll-padding-inline: 1rem;
+  scrollbar-width: none;
+
+  & > * {
+    flex: 0 0 var(--rail-item-width);
+    scroll-snap-align: start;
+  }
+}

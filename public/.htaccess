@@ -1,0 +1,36 @@
+# Apache hosting (e.g. cPanel shared hosting) for the static export in out/.
+# Mirrors vercel.json; Vercel itself ignores this file.
+
+Options -Indexes
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # HTTP -> HTTPS is done by the hosting's SSL front server (isimtescil), not here:
+  # Apache behind it only ever sees plain HTTP, so a rule here would loop.
+
+  # Bare domain -> www, the canonical address (company.url).
+  RewriteCond %{HTTP_HOST} ^uyka\.com\.tr$ [NC]
+  RewriteRule ^ https://www.uyka.com.tr%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # No includeSubDomains/preload: other subdomains (webmail, cPanel) stay unaffected.
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  <If "%{REQUEST_URI} =~ m#^/(images|textures|_next/static)/#">
+    Header set Cache-Control "public, max-age=604800"
+  </If>
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType application/manifest+json .webmanifest
+</IfModule>

@@ -1,0 +1,113 @@
+/*
+ * Accessibility panel overrides (see src/lib/a11y.ts). Each block reacts to one
+ * data attribute on <html>. Token overrides beat :root because the selectors
+ * are more specific.
+ */
+
+/* Text size: +12.5 % of the default rem per step (TEXT_SCALE_STEP_PERCENT). */
+html[data-text-scale="1"] {
+  font-size: 112.5%;
+}
+
+html[data-text-scale="2"] {
+  font-size: 125%;
+}
+
+html[data-text-scale="3"] {
+  font-size: 137.5%;
+}
+
+/* High contrast: secondary greys become full ink, lines and accents darken. */
+html[data-contrast] {
+  --color-muted: var(--color-ink);
+  --color-line: #6f7b72;
+  --color-accent: #1e4a22;
+  --color-accent-soft: #d8ecce;
+}
+
+html[data-contrast] body {
+  -webkit-font-smoothing: auto;
+}
+
+/* Highlight links: every link underlined, focus/hover boxed. */
+html[data-links] a {
+  text-decoration: underline !important;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 2px;
+}
+
+html[data-links] a:hover,
+html[data-links] a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Readable font: plain, wide, highly legible system sans for every role. */
+html[data-readable] {
+  --font-display: Verdana, Tahoma, Arial, sans-serif;
+  --font-sans: Verdana, Tahoma, Arial, sans-serif;
+  --font-product: Verdana, Tahoma, Arial, sans-serif;
+  --display-weight: 600;
+  --tracking-display: 0;
+}
+
+/* Wider line and letter spacing for body text. */
+html[data-spacing] :is(p, li, dd, td, label) {
+  line-height: 1.9 !important;
+  letter-spacing: 0.03em !important;
+  word-spacing: 0.1em !important;
+}
+
+/* Stop motion: everything static, hidden-until-revealed content shown. */
+html[data-motion-off] *,
+html[data-motion-off] *::before,
+html[data-motion-off] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html[data-motion-off] [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html[data-motion-off] .marquee-track {
+  animation: none !important;
+}
+
+/* Grayscale: removes colour for visitors sensitive to it. On <html> the filter
+   does not create a containing block, so fixed controls stay in place. */
+html[data-grayscale] {
+  filter: grayscale(1);
+}
+
+/* Highlight headings: page outline visible at a glance. */
+html[data-headings] :is(h1, h2, h3, h4) {
+  outline: 2px dashed var(--color-accent);
+  outline-offset: 0.35em;
+  border-radius: 0.25em;
+}
+
+/* Hide images: photos, 3D and video out of the way; layout keeps its shape. */
+html[data-hide-images] :is(img, picture, video, canvas) {
+  visibility: hidden !important;
+}
+
+/* Big cursor: 48 px arrow; accent green (--color-accent, hard-coded: CSS vars do not reach data URIs) on anything clickable. */
+html[data-big-cursor],
+html[data-big-cursor] * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l15 11.5-6.6.9 3.9 7.4-3 1.6-3.9-7.5L4 20z' fill='%23111' stroke='%23fff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")
+      8 4,
+    auto !important;
+}
+
+html[data-big-cursor] :is(a, button, [role="button"], [role="switch"], label, select, summary),
+html[data-big-cursor] :is(a, button, [role="button"], [role="switch"], label, select, summary) * {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l15 11.5-6.6.9 3.9 7.4-3 1.6-3.9-7.5L4 20z' fill='%233e6b3f' stroke='%23fff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E")
+      8 4,
+    pointer !important;
+}
