@@ -1,13 +1,19 @@
-# UYKA — İznik Zeytinyağı web sitesi
+# uyka
 
-Next.js 16 statik export (backendsiz). Plan ve tasarım kararları: [docs/PLAN.md](docs/PLAN.md) · Renk/font/fotoğraf nereden değişir: [docs/DESIGN_CONTROLS.md](docs/DESIGN_CONTROLS.md) · Yayına alma (hosting, formlar, DNS): [docs/DEPLOY.md](docs/DEPLOY.md).
+Kurumsal tanıtım sitesi (Next.js 16, statik export). Form gönderimi için küçük bir PHP dosyası içerir.
+
+## Çalıştırma
+
+Node.js 20 veya üstü gerekir.
 
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-npm run assets     # assets/photos + logo → public/images (AVIF/WebP)
-npm run build      # statik çıktı: out/
+npm run dev
 ```
 
-İçerik `src/content/` altındadır. Doğrulanmamış iddialar `src/content/claims.ts` içinde `pending` olarak işaretlidir.
-Opsiyonel form servisi için `.env.example` dosyasına bakın.
+Tarayıcıda `http://localhost:3000` adresini açın.
+
+## Notlar
+
+- Form SMTP şifresi boş bırakılmıştır (`uyka-form-config.php`); kullanmak için kendi bilgilerinizi girin.
+- Hosting dosyaları ve eski site yedekleri depoya dahil değildir.
