@@ -127,10 +127,4 @@ Product photography is in progress. Products that have not been photographed yet
 
 ## Rights
 
-© UYKA. All rights reserved. The UYKA name, logo, label designs, product photography and copy belong to UYKA and may not be reused without permission. This repository is published as a portfolio reference.
-
----
-
-<p align="center">
-  Designed and developed by <a href="https://github.com/aricacan">Can Arica</a> · Stark Partners
-</p>
+© UYKA. All rights reserved. The UYKA name, logo, label designs, product photography and copy belong to UYKA and may not be reused without permission.
